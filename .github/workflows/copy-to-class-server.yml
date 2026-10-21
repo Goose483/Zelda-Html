@@ -1,0 +1,20 @@
+name: Copy to class server
+on:
+  push:
+    branches: ['**']
+permissions:
+  contents: read
+jobs:
+  copy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Push this branch to git.createcreativeprograms.com
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CLASS_TOKEN: ${{ secrets.CLASS_SERVER_TOKEN }}
+          CLASS_REPO: 2028/Github   # your class and repository on the class server
+          CLASS_USER: s2028-04    # your class username
+        run: |
+          git clone --quiet --bare "https://x-access-token:$GH_TOKEN@github.com/$GITHUB_REPOSITORY.git" repo.git
+          cd repo.git
+          git push "https://$CLASS_USER:$CLASS_TOKEN@git.createcreativeprograms.com/$CLASS_REPO.git" "refs/heads/$GITHUB_REF_NAME:refs/heads/$GITHUB_REF_NAME"
