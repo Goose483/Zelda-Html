@@ -12,7 +12,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           CLASS_TOKEN: ${{ secrets.CLASS_SERVER_TOKEN }}
-          CLASS_REPO: 2028/Github   # your class and repository on the class server
+          CLASS_REPO: 2028/Zelda-Html   # your class and repository on the class server
           CLASS_USER: s2028-04    # your class username
         run: |
           git clone --quiet --bare "https://x-access-token:$GH_TOKEN@github.com/$GITHUB_REPOSITORY.git" repo.git
